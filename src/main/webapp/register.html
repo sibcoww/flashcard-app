@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h2>Регистрация</h2>
+<input type="text" id="username" placeholder="Имя пользователя"><br>
+<input type="password" id="password" placeholder="Пароль"><br>
+<button onclick="register()">Зарегистрироваться</button>
+
+<p id="status"></p>
+<p>Уже есть аккаунт? <a href="login.html">Войти</a></p>
+
+<script>
+    async function register() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        const res = await fetch('/api/register', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ username, password })
+        });
+
+        const msg = await res.text();
+        document.getElementById('status').innerText = res.status === 201
+            ? '✅ Регистрация успешна. Можете войти.'
+            : '❌ ';
+    }
+</script>
+</body>
+</html>

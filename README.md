@@ -1,1 +1,1 @@
-"# flashcard-app" 
+"# flashcard-app" написан в формате вайбкодинга
